@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>计算器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class=text-center>计算器</h1>
+                <div class="alert alert-info" role="alert">只支持计算满五唯一！</div>
+                <div class="form-group">
+                    <label for="a">总价</label>
+                    <input type="email" class="form-control" id="a" placeholder="总价">
+                </div>
+                <div class="form-group">
+                    <label for="b">评估比例%</label>
+                    <input type="email" class="form-control" id="b" placeholder="评估比例" value="85">
+                </div>
+                <div class="form-group">
+                    <label for="c">贷款比例%</label>
+                    <input type="email" class="form-control" id="c" placeholder="贷款比例" value="85">
+                </div>
+                <div class="form-group">
+                    <label for="d">中介费%</label>
+                    <input type="email" class="form-control" id="d" placeholder="贷款比例" value="2.7">
+                </div>
+                <div class="form-group">
+                    <label for="e">首套 / 二套</label>
+                    <select id="e" class="form-control">
+                        <option>首套</option>
+                        <option>二套</option>
+                    </select>
+                </div>
+                <button class="btn btn-default">计算</button>
+                <br><br>
+                <div class="alert alert-info" role="alert">
+                    <h1>结果：<span id="result"></span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $("button").click(function(){
+                var a = $("#a").val(),
+                b = $("#b").val(),
+                c = $("#c").val(),
+                d = $("#d").val(),
+                e = $("#e").val(),
+                r=0;
+                r = a - a * (b/100) * c/100 + a * (b/100) * c/100 * (e ==="首套" ? 35/100 : 50/100) + a * (e ==="首套" ? 1/100 : 3/100) + a * d/100;
+                $("#result").text(r + "元");
+            });
+        });
+    </script>
+</body>
+
+</html>
