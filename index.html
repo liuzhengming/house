@@ -15,32 +15,36 @@
                 <h1 class=text-center>计算器</h1>
                 <div class="alert alert-info" role="alert">只支持计算满五唯一！</div>
                 <div class="form-group">
-                    <label for="a">总价</label>
-                    <input type="text" class="form-control" id="a" placeholder="总价">
+                    <label for="a">总价（万）</label>
+                    <input type="text" class="form-control" id="a" placeholder="输入房屋总价（万）">
                 </div>
                 <div class="form-group">
                     <label for="b">评估比例%</label>
                     <input type="text" class="form-control" id="b" placeholder="评估比例" value="85">
                 </div>
                 <div class="form-group">
-                    <label for="c">贷款比例%</label>
-                    <input type="text" class="form-control" id="c" placeholder="贷款比例" value="85">
+                    <label for="c">首套 / 二套</label>
+                    <select id="c" class="form-control">
+                        <option value="35">首套（35%）</option>
+                        <option value="60">二套（60%）</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="d">中介费%</label>
                     <input type="text" class="form-control" id="d" placeholder="贷款比例" value="2.7">
                 </div>
-                <div class="form-group">
-                    <label for="e">首套 / 二套</label>
-                    <select id="e" class="form-control">
-                        <option>首套</option>
-                        <option>二套</option>
-                    </select>
-                </div>
                 <button class="btn btn-default btn-block">计算</button>
                 <br><br>
                 <div class="alert alert-info" role="alert">
-                    <h1>结果：<span id="result"></span></h1>
+                    <h1>首付：<span id="jsf"></span></h1>
+                    <ul>
+                        <li>网签价：<span id="wqj"></span></li>
+                        <li>贷款：<span id="dk"></span></li>
+                        <li>税费：<span id="sf"></span></li>
+                        <li>中介费：<span id="zjf"></span></li>
+                        <li>================</li>
+                        <li>总支出：<span id="zj"></span></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -48,14 +52,25 @@
     <script>
         $(function(){
             $("button").click(function(){
-                var a = $("#a").val(),
-                b = $("#b").val(),
-                c = $("#c").val(),
-                d = $("#d").val(),
-                e = $("#e").val(),
-                r=0;
-                r = a - a * (b/100) * c/100 + a * (b/100) * c/100 * (e ==="首套" ? 35/100 : 50/100) + a * (e ==="首套" ? 1/100 : 3/100) + a * d/100;
-                $("#result").text(r + "元");
+                var a = parseFloat($("#a").val()), // 房屋总价
+                b = parseFloat($("#b").val()), // 评估比例
+                c = parseFloat($("#c").val()), // 首套 || 二套
+                d = parseFloat($("#d").val()), // 中介费比例
+
+                fwzj = a, // 房屋总价
+                wqj = fwzj * b/100, // 网签价
+                jsf = wqj * c/100 + fwzj * (1 - b/100), // 净首付
+                dk = wqj * (1 - c/100),
+                sf= wqj * 1/100, // 税费
+                zjf = fwzj * d/100, // 中介费
+                zj = fwzj + sf+ zjf; // 总和
+
+                $("#zj").html(zj + "万");
+                $("#wqj").html(wqj + "万");
+                $("#sf").html(sf + "万");
+                $("#zjf").html(zjf + "万");
+                $("#jsf").html(jsf + "万");
+                $("#dk").html(dk + "万");
             });
         });
     </script>
