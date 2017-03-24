@@ -59,10 +59,10 @@
 
                 fwzj = a, // 房屋总价
                 wqj = fwzj * b/100, // 网签价
-                jsf = wqj * c/100 + fwzj * (1 - b/100), // 净首付
                 dk = wqj * (1 - c/100),
                 sf= wqj * 1/100, // 税费
                 zjf = fwzj * d/100, // 中介费
+                jsf = wqj * c/100 + fwzj * (1 - b/100) + sf + zjf, // 净首付
                 zj = fwzj + sf+ zjf; // 总和
 
                 $("#zj").html(zj + "万");
