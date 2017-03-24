@@ -65,12 +65,12 @@
                 jsf = wqj * c/100 + fwzj * (1 - b/100) + sf + zjf, // 净首付
                 zj = fwzj + sf+ zjf; // 总和
 
-                $("#zj").html(zj + "万");
-                $("#wqj").html(wqj + "万");
-                $("#sf").html(sf + "万");
-                $("#zjf").html(zjf + "万");
-                $("#jsf").html(jsf + "万");
-                $("#dk").html(dk + "万");
+                $("#zj").html(zj.toFixed(2) + "万");
+                $("#wqj").html(wqj.toFixed(2) + "万");
+                $("#sf").html(sf.toFixed(2) + "万");
+                $("#zjf").html(zjf.toFixed(2) + "万");
+                $("#jsf").html(jsf.toFixed(2) + "万");
+                $("#dk").html(dk.toFixed(2) + "万");
             });
         });
     </script>
